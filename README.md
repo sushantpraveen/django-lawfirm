@@ -6,7 +6,7 @@ A modern and responsive Law Firm web application built using **Django**, **Boots
 
 ## 🚀 Live Demo
 
-🌐 [Click here to view the live website](https://your-live-link.com)
+🌐 [Click here to view the live website](https://sushantpraveen.pythonanywhere.com/)
 
 ---
 
