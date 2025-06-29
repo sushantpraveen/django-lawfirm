@@ -34,4 +34,6 @@ A modern and responsive Law Firm web application built using **Django**, **Boots
 ---
 
 ### 🔐 Login Page
-![Login Page](https://github.com/user-attachments/assets/4a65b941-a11c-44ba-afe0-c83accd28914)
+A clean and responsive login page designed using Bootstrap and Django templating.
+
+![Image](https://github.com/user-attachments/assets/80b317ee-6dd8-4616-b752-540e498fe16d)
