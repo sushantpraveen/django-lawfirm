@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block extra_styles %}
+<style>
+body {
+    min-height: 100vh;
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center center/cover no-repeat fixed;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    position: relative;
+}
+.bg-glass {
+    background: rgba(255,255,255,0.81);
+    border-radius: 28px !important;
+    box-shadow: 0 8px 36px 0 rgba(30,40,90,0.11), 0 1.5px 6px 0 rgba(80,143,248,0.09) !important;
+    border: none !important;
+    backdrop-filter: blur(18px) saturate(125%);
+}
+.jumbotron {
+    margin-top: 65px;
+    padding: 44px 36px 40px 36px;
+    border-radius: 28px;
+    background: none !important;
+    box-shadow: none !important;
+}
+h1 {
+    font-weight: 800;
+    color: #222b6e;
+    letter-spacing: -1px;
+    font-size: 2.1rem;
+    margin-bottom: 26px;
+}
+.btn-success {
+    background: #37c978;
+    border: none;
+    font-weight: 700;
+    border-radius: 9px;
+    padding: 11px 32px;
+    box-shadow: 0 2px 10px rgba(55,201,120,0.12);
+    transition: background .12s;
+}
+.btn-success:hover {
+    background: #29805e;
+    color: #fff !important;
+    transform: scale(1.02);
+}
+.btn-secondary {
+    background: #31356e;
+    border: none;
+    font-weight: 600;
+    border-radius: 9px;
+    padding: 11px 28px;
+    margin-left: 9px;
+    color: #fff;
+    transition: background .11s;
+}
+.btn-secondary:hover {
+    background: #222b6e;
+    color: #e5eafd !important;
+}
+form {
+    margin-top: 32px;
+}
+input, select, textarea {
+    border-radius: 9px !important;
+    border: 2px solid #e3e7ed;
+    background: #f8fafd !important;
+    font-size: 1.08rem;
+    min-height: 45px;
+    box-shadow: 0 0.5px 2px rgba(120,140,225,0.05);
+    padding: 12px 14px;
+}
+label {
+    color: #6371ab;
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 0.98rem;
+}
+@media (max-width: 991px){ .jumbotron { padding: 16px 4vw !important;} }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="min-height:76vh;">
+        <div class="col-lg-8">
+            <div class="bg-glass jumbotron shadow-lg">
+                <h1>Update User Details</h1>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">{{ form.username|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form.email|as_crispy_field }}</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">{{ form1.phone|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form1.address|as_crispy_field }}</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">{{ form1.street|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form1.city|as_crispy_field }}</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">{{ form1.state|as_crispy_field }}</div>
+                        <div class="col-md-6">{{ form1.zipcode|as_crispy_field }}</div>
+                    </div>
+
+                    <div class="mb-3">{{ form1.image|as_crispy_field }}</div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success">Update</button>
+                        <a href="{% url 'profile' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

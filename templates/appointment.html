@@ -1,0 +1,172 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Book Your Appointment</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+  body {
+  margin: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+  background: url('https://static.vecteezy.com/system/resources/previews/007/015/621/original/justice-scales-and-wooden-judge-gavel-concept-law-hammer-sign-with-books-of-laws-legal-law-and-auction-symbol-classic-court-libra-flat-illustration-vector.jpg') center center/cover no-repeat fixed;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+
+  .appointment-card {
+  position: relative;
+  border-radius: 2.1rem;
+  background: rgba(255,255,255,0.28);
+  padding: 1.3rem 1rem 1rem 1rem;
+  max-width: 900px; 
+  width: 100%;
+  box-shadow: 0 18px 54px 0 rgba(86,63,226, 0.20);
+  backdrop-filter: blur(22px);
+  border: 1.5px solid rgba(255,255,255,0.32);
+  overflow: hidden;
+  margin-bottom: 0.7rem;
+  }
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      background: linear-gradient(92deg, #30cfd0, #643dff 100%);
+      color: #fff;
+      border-radius: 1.5rem 1.5rem 0 0;
+      padding: 0.7rem 1rem 0.6rem 1rem;
+      margin: -2.7rem -2.1rem 2.1rem -2.1rem;
+      box-shadow: 0 7px 18px rgba(99,61,255,0.06);
+    }
+    .header-bar .icon {
+      font-size: 2.7rem;
+      filter: drop-shadow(0 3px 8px #30cfd0AA);
+    }
+    .header-bar h4 {
+      font-weight: 700;
+      margin: 0;
+      font-size: 1.37rem;
+      letter-spacing: 1px;
+      color: #fff;
+      text-shadow: 0 1px 12px #33086722;
+    }
+    label {
+      color: #643dff;
+      font-weight: 600 !important;
+      font-family: 'Roboto', Arial, sans-serif;
+      letter-spacing: .3px;
+    }
+    .form-control,
+    .form-select {
+      border-radius: 0.9rem;
+      border-width: 0.05rem;
+      border-color: #dfdfef;
+      padding: 0.6rem 1rem;
+      background: rgba(255,255,255,0.87);
+      box-shadow: 0 2px 12px #a1c4fd22;
+      transition: border-color 0.22s, box-shadow 0.22s;
+    }
+    .form-control:focus,
+    .form-select:focus {
+      border-color: #643dff;
+      box-shadow: 0 2px 16px #647bff44;
+      background: #fff;
+    }
+    .btn-primary {
+      background: linear-gradient(92deg, #30cfd0, #643dff 90%);
+      border: none;
+      font-weight: 700;
+      letter-spacing: 1px;
+      border-radius: 1.8rem;
+      box-shadow: 0 3px 18px #647bff25;
+      padding: 0.75rem 1.5rem;
+      transition: background 0.2s, transform 0.12s;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(92deg, #643dff 18%, #30cfd0 100%);
+      transform: translateY(-2px) scale(1.025);
+      box-shadow: 0 9px 24px rgba(99,61,255,0.09);
+    }
+    .form-check-input:checked {
+      background-color: #643dff;
+      border-color: #30cfd0;
+      box-shadow: 0 2px 12px #30cfd033;
+    }
+    @media (max-width: 620px) {
+      .appointment-card {
+        padding: 11px 1vw 10px 1vw;
+        max-width: 98vw;
+        border-radius: 1rem;
+      }
+      .header-bar {
+        padding: 0.8rem 5vw 0.7rem 5vw;
+        margin: -11px -1vw 18px -1vw;
+        border-radius: 1rem 1rem 0 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="appointment-card">
+    <div class="header-bar">
+      <span class="icon">📅</span>
+      <h4>Book Your Appointment</h4>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          {{ app.name|as_crispy_field }}
+        </div>
+        <div class="col-md-6">
+          {{ app.phone|as_crispy_field }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          {{ app.email|as_crispy_field }}
+        </div>
+        <div class="col-md-6">
+          {{ app.address|as_crispy_field }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          {{ app.case_type|as_crispy_field }}
+        </div>
+        <div class="col-md-6">
+          {{ app.court_name|as_crispy_field }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          {{ app.case_document|as_crispy_field }}
+        </div>
+        <div class="col-md-6">
+          {{ app.total_no_hearing|as_crispy_field }}
+        </div>
+      </div>
+
+      <div class="mb-3">
+        {{ app.description|as_crispy_field }}
+      </div>
+
+      <div class="mb-3">
+        {{ app.fee|as_crispy_field }}
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Submit Appointment</button>
+    </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

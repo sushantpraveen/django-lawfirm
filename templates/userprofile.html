@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+    body {
+        font-family: 'Montserrat', Arial, sans-serif;
+        background: linear-gradient(119deg, #a1c4fd 0%, #c2e9fb 100%);
+        min-height: 100vh;
+    }
+    .profile-bg {
+        background: rgba(255,255,255,0.9);
+        border-radius: 20px;
+        box-shadow: 0 10px 32px 1px rgba(30,90,180,0.12);
+        margin-top: 48px;
+        margin-bottom: 38px;
+        padding: 40px 35px 35px 35px;
+        max-width: 980px;
+        position: relative;
+        overflow: hidden;
+    }
+    .profile-bg::before {
+        content: '';
+        position: absolute;
+        right: -60px;
+        bottom: -60px;
+        width: 260px;
+        height: 260px;
+        background: radial-gradient(circle, rgba(162,189,255,0.37), transparent 70%);
+        z-index: 0;
+    }
+    .profile-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        align-items: center;
+    }
+    .profile-main, .profile-photo {
+        flex: 1 1 330px;
+        z-index: 1;
+    }
+    .profile-header {
+        font-weight: 700;
+        font-size: 2.6rem;
+        color: #2361aa;
+        margin-bottom: 26px;
+        letter-spacing: 1.3px;
+    }
+    .profile-list {
+        margin-bottom: 22px;
+    }
+    .profile-list h5 {
+        font-size: 1.08rem;
+        margin-bottom: 11px;
+        color: #285782;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .profile-list h5 strong {
+        color: #0eb7a2;
+        font-weight: 700;
+        margin-right: 5px;
+    }
+
+    .update-btn {
+        background: linear-gradient(91deg, #186ad6 60%, #0eb7a2 100%);
+        border: none;
+        font-weight: 700;
+        font-size: 1rem;
+        padding: 10px 20px;
+        border-radius: 8px;
+        color: white;
+        box-shadow: 0 4px 12px rgba(40,87,130,0.09);
+        margin-top: 6px;
+        transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+        display: inline-block;
+    }
+    .update-btn:hover {
+        background: linear-gradient(91deg, #0eb7a2 10%, #186ad6 90%);
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 4px 18px rgba(30,106,214,0.11);
+        color: #fff;
+        text-decoration: none;
+    }
+    .profile-photo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+    }
+    .avatar {
+        width: 170px;
+        height: 170px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 2px 24px 2px rgba(45,187,180,0.15);
+        border: 5px solid #0eb7a2;
+        background: #e2ecf8;
+        margin-bottom: 9px;
+    }
+    .no-photo {
+        font-size: 1.08rem;
+        color: #9ca6b2;
+        font-style: italic;
+    }
+    @media (max-width: 900px) {
+        .profile-bg {
+            padding: 18px 7px;
+        }
+        .profile-row {
+            flex-direction: column;
+            gap: 22px;
+        }
+        .profile-header {
+            font-size: 2rem;
+        }
+        .avatar {
+            width: 115px;
+            height: 115px;
+        }
+    }
+    /* Table Styles */
+    .appt-section {
+        margin: 0 auto 45px auto;
+        max-width: 980px;
+        background: rgba(255,255,255,0.89);
+        border-radius: 17px;
+        box-shadow: 0 5px 25px rgba(30,90,180,0.09);
+        padding: 30px 10px 25px 10px;
+    }
+    .table thead th {
+        background: linear-gradient(88deg, #2361aa 70%, #0eb7a2 130%);
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.02rem;
+        border: none;
+    }
+    .table tbody td, .table-bordered {
+        border-color: #e1eaf2;
+    }
+    .table-striped>tbody>tr:nth-of-type(odd) {
+        background: #f3f7fa;
+    }
+    .appt-section h2 {
+        color: #2361aa;
+        font-size: 1.45rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 22px;
+        text-align: center;
+    }
+</style>
+
+<div class="container profile-bg">
+    <div class="profile-row">
+        <div class="profile-main">
+            <div class="profile-header"><i class="bi bi-person-badge"></i> User Profile</div>
+            <div class="profile-list">
+                <h5><i class="bi bi-person"></i> <strong>Username:</strong> {{ user.username }}</h5>
+                <h5><i class="bi bi-envelope"></i> <strong>Email:</strong> {{ user.email }}</h5>
+                <h5><i class="bi bi-telephone"></i> <strong>Phone:</strong> {{ user.registration.phone }}</h5>
+                <h5><i class="bi bi-geo-alt"></i> <strong>Address:</strong> {{ user.registration.address }}</h5>
+                <h5><i class="bi bi-signpost-2"></i> <strong>Street:</strong> {{ user.registration.street }}</h5>
+                <h5><i class="bi bi-buildings"></i> <strong>City:</strong> {{ user.registration.city }}</h5>
+                <h5><i class="bi bi-flag"></i> <strong>State:</strong> {{ user.registration.state }}</h5>
+                <h5><i class="bi bi-mailbox"></i> <strong>Zip:</strong> {{ user.registration.zipcode }}</h5>
+            </div>
+            <a href="{% url 'update_profile' %}" class="update-btn"><i class="bi bi-pencil"></i> Update Profile</a>
+        </div>
+        <div class="profile-photo">
+            {% if user.registration.image %}
+                <img src="{{ user.registration.image.url }}" alt="Profile Photo" class="avatar shadow">
+            {% else %}
+                <div class="no-photo"><i class="bi bi-exclamation-circle"></i> No Profile Picture</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="container appt-section">
+    <h2><i class="bi bi-calendar-event"></i> All Appointments</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Case ID</th>
+                    <th>Case Type</th>
+                    <th>Description</th>
+                    <th>Court</th>
+                    <th>Lawyer</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Fee</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in all_appointments %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.case_type }}</td>
+                    <td>{{ i.description }}</td>
+                    <td>{{ i.court_name }}</td>
+                    {% with i.appointments.first as case %}
+                        {% if case %}
+                            <td>{{ case.lawyers.name }}</td>
+                            <td>{{ case.date }}</td>
+                            <td>{{ case.time }}</td>
+                        {% else %}
+                            <td colspan="3" class="text-center text-muted">No case data</td>
+                        {% endif %}
+                    {% endwith %}
+                    <td>₹{{ i.fee }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="8" class="text-center text-muted">No appointments found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

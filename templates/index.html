@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block extra_styles %}
+<style>
+body {
+    min-height: 100vh;
+    background: url('https://images.unsplash.com/photo-1453945619913-79ec89a82c51?fm=jpg&q=60&w=3000') center center/cover no-repeat fixed;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    position: relative;
+}
+.bg-glass {
+    background: rgba(255, 255, 255, 0.78);
+    border-radius: 28px !important;
+    box-shadow: 0 10px 36px 0 rgba(30,40,90,0.14), 0 2px 6px 0 rgba(80,143,248,0.11) !important;
+    border: none !important;
+    backdrop-filter: blur(22px) saturate(135%); /* glass effect */
+}
+.card-body {
+    padding: 48px 34px 36px 34px !important;
+    z-index: 2;
+}
+h2, .h2 {
+    font-weight: 900;
+    color: #253561;
+    letter-spacing: -1.2px;
+    text-shadow: 0 3px 12px rgba(180,205,255,0.18);
+}
+.text-success {
+    color: #37c978 !important;
+}
+.btn-primary {
+    background: #2d6ae0;
+    border: none;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-radius: 9px;
+    box-shadow: 0 2px 10px rgba(79,140,255,0.10);
+    transition: background .14s;
+}
+.btn-primary:hover {
+    background: #222b6e;
+    color: #fff;
+    transform: scale(1.03);
+}
+.btn-success {
+    background: #37c978;
+    border: none;
+    font-weight: 700;
+    border-radius: 9px;
+    box-shadow: 0 1px 7px rgba(55,201,120,0.08);
+    transition: background .12s;
+}
+.btn-success:hover {
+    background: #29805e;
+    color: #fff !important;
+    transform: scale(1.03);
+}
+.form-control, .form-select {
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: #e3e7ed;
+    background: #fcfcfdcc;
+    font-size: 1.07rem;
+    min-height: 45px;
+}
+label {
+    color: #6670ad;
+    font-weight: 600;
+    font-size: 0.98rem;
+}
+@media (max-width: 991px){ .card-body { padding: 22px 6px !important; } }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card bg-glass border-0 rounded-4">
+                <div class="card-body p-5">
+                    {% if registered %}
+                        <div class="text-center">
+                            <h2 class="text-success mb-4">Thank you for registering!</h2>
+                            <p class="lead">Your registration was successful.</p>
+                            <a href="{% url 'user_login' %}" class="btn btn-success mt-3">Proceed to Login</a>
+                        </div>
+                    {% else %}
+                        <h2 class="text-center mb-4">Registration Form</h2>
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    {{ reg.username|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ reg.email|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    {{ form1.phone|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form1.address|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    {{ form1.street|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form1.city|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    {{ form1.state|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form1.zipcode|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                {{ form1.image|as_crispy_field }}
+                            </div>
+                            <div class="mb-3">
+                                {{ reg.password|as_crispy_field }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form1.captcha }}
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary px-5 py-2">
+                                    REGISTER
+                                </button>
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
